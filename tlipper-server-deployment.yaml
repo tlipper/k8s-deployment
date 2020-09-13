@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: tlipper-server-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      component: tlipper-server
+  template:
+    metadata:
+      labels:
+        component: tlipper-server
+    spec:
+      containers:
+        - name: tlipper-server
+          image: yigitozkavci/tlipper-server:0.1.3
+          ports:
+            - containerPort: 8080
+          env:
+            - name: DB_HOST
+              value: postgres-cluster-ip-service
+            - name: DB_PORT
+              value: '5432'
+            - name: DB_USER
+              value: postgres
+            - name: DB_NAME
+              value: tlipper
+            - name: DB_PASS
+              value: postgres

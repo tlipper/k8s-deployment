@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tlipper-grafana-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: tlipper-grafana
+  template:
+    metadata:
+      labels:
+        component: tlipper-grafana
+    spec:
+      containers:
+        - name: tlipper-grafana
+          image: grafana/grafana
+          ports:
+            - containerPort: 3000
