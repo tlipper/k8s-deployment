@@ -14,6 +14,6 @@ spec:
     spec:
       containers:
         - name: tlipper-ui
-          image: yigitozkavci/tlipper-ui:0.1.1
+          image: yigitozkavci/tlipper-ui:0.1.3-ea2163
           ports:
             - containerPort: 5000

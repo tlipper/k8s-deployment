@@ -2,18 +2,11 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: backend-ingress-service
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    # nginx.ingress.kubernetes.io/rewrite-target: /$1
 spec:
   rules:
-    - host: tlipper
-      http:
-        paths:
-          - pathType: Prefix
-            path: "/app/"
-            backend:
-              service:
-                name: tlipper-server-cluster-ip-service
-                port:
-                  number: 8080
     - host: tlipper
       http:
         paths:
@@ -24,6 +17,16 @@ spec:
                 name: tlipper-ui-cluster-ip-service
                 port:
                   number: 5000
+    - host: tlipper-api
+      http:
+        paths:
+          - pathType: Prefix
+            path: "/"
+            backend:
+              service:
+                name: tlipper-server-cluster-ip-service
+                port:
+                  number: 8080
     - host: grafana
       http:
         paths:
